@@ -1,9 +1,5 @@
 # Rock Paper Scissors HTML Neural Network 🪨📄✂️
 
-## Kerollos Lowandy
-
-**Repository:** [rps-html-nn](https://github.com/Kerollosl/rps-html-nn)
-
 ## 📋 Overview
 
 A browser-based neural network that plays Rock Paper Scissors using real-time webcam input. Built with TensorFlow.js, this project demonstrates transfer learning and real-time image classification entirely in the browser.
@@ -165,16 +161,6 @@ This project demonstrates:
 - Ensure no other app is using the webcam
 - Try a different browser
 
-## 👤 Author
-
-**Kerollos Lowandy**
-- GitHub: [@Kerollosl](https://github.com/Kerollosl)
-- Email: klowandy@gmail.com
-
 ## 📄 License
 
 See `License.txt` for details.
-
----
-
-**Last Updated:** March 27, 2026
