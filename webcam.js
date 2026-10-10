@@ -21,6 +21,7 @@
 class Webcam {
   constructor(element) { this.webcamElement=element; this.stream=null; }
   async setup() {
+    try {
     this.stream=await navigator.mediaDevices.getUserMedia({video:true,audio:false});
     this.webcamElement.srcObject=this.stream;
     await new Promise((resolve,reject)=>{
@@ -28,6 +29,7 @@ class Webcam {
       this.webcamElement.onloadeddata=resolve;this.webcamElement.onerror=reject;
     });
     await this.webcamElement.play();
+    } catch(error) { this.stop(); throw error; }
   }
   capture() {
     return tf.tidy(()=>{

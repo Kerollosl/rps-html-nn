@@ -1,4 +1,5 @@
 let mobilenet;
+let mobilenetOwner;
 let model;
 const webcam = new Webcam(document.getElementById("wc"));
 const dataset = new RPSDataset();
@@ -14,8 +15,10 @@ async function loadMobilenet() {
   const mobilenet = await tf.loadLayersModel(
     "https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json"
   );
+  mobilenetOwner = mobilenet;
   const layer = mobilenet.getLayer("conv_pw_13_relu");
-  return tf.model({ inputs: mobilenet.inputs, outputs: layer.output });
+  const features=tf.model({ inputs: mobilenet.inputs, outputs: layer.output });
+  return features;
 }
 
 async function train() {
@@ -46,7 +49,7 @@ async function train() {
       },
     },
   });
-  } finally { training = false; }
+  } catch(error) {model?.dispose();model=null;document.getElementById("prediction").textContent=`Training failed: ${error.message}`;} finally { training = false; }
 }
 
 function handleButton(elem) {
@@ -131,6 +134,6 @@ async function init() {
   tf.tidy(() => mobilenet.predict(webcam.capture()));
 }
 
-window.addEventListener('pagehide',()=>{ isPredicting=false;webcam.stop();setTimeout(()=>{model?.dispose();mobilenet?.dispose();dataset.xs?.dispose();dataset.ys?.dispose();},0); });
+window.addEventListener('pagehide',()=>{ isPredicting=false;webcam.stop();setTimeout(()=>{model?.dispose();mobilenetOwner?.dispose();dataset.xs?.dispose();dataset.ys?.dispose();},0); });
 init().catch(error=>{document.getElementById('prediction').textContent=`Camera/model unavailable: ${error.message}`;webcam.stop();});
 

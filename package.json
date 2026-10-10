@@ -1,0 +1,11 @@
+{
+  "name": "rps-html-nn",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "@tensorflow/tfjs": "4.22.0"
+  }
+}
