@@ -5,7 +5,7 @@ class RPSDataset {
 
   addExample(example, label) {
     if (this.xs == null) {
-      this.xs = tf.keep(example);
+      this.xs = tf.keep(example.clone());
       this.labels.push(label);
     } else {
       const oldX = this.xs;
@@ -35,3 +35,4 @@ class RPSDataset {
     }
   }
 }
+
